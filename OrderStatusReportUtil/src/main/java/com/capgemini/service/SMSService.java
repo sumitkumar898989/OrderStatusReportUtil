@@ -1,29 +1,24 @@
 package com.capgemini.service;
 
-import com.textmagic.sdk.RestClient;
-import com.textmagic.sdk.RestException;
-import com.textmagic.sdk.resource.instance.*;
-import java.util.Arrays;
-
 import org.springframework.stereotype.Component;
+
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
 
 @Component
 public class SMSService{
 	
-  public  void sendSMS() throws RestException {
+  public  void sendSMS(){
 	  
-	  System.out.println("in SMSService sendSMS method");
-    RestClient client = new RestClient("<username>", "<apiv2_key>");
-    TMNewMessage m = client.getResource(TMNewMessage.class);
-    m.setText("Hello from TextMagic Java");
-    m.setPhones(Arrays.asList(new String[] {"7410772589"}));
-    try {
-      m.send();
-    } catch (final RestException e) {
-      System.out.println(e.getErrors());
-      throw new RuntimeException(e);
-    }
-    System.out.println(m.getId());
-  }
+	System.out.println("in SMSService sendSMS method");
+	Twilio.init("AC5ef8252f9f7ae2dba8c8b184ed3a4d3f","1da592e9aa0d6a74831bcc72f4748f29");
+
+    Message.creator(new PhoneNumber("+917410772589"),
+                    new PhoneNumber("+18147475433"), "Order failure reached at crtical point request your attention").create();
+    
 }
+}
+
 

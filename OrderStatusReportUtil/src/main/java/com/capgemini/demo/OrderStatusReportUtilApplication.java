@@ -17,11 +17,12 @@ public class OrderStatusReportUtilApplication {
 		ConfigurableApplicationContext context=SpringApplication.run(OrderStatusReportUtilApplication.class, args);
 		System.out.println("Application getting started");
 		EmailSenderController e = context.getBean(EmailSenderController.class);
-		//SMSService s = context.getBean(SMSService.class);
+		SMSService s = context.getBean(SMSService.class);
 		try {
 			e.execute();
 			System.out.println("Email Sent");
-			//s.sendSMS();
+			s.sendSMS();
+			System.out.println("SMS Sent");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
